@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page - Enterprise Hub</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Oracle Fusion Color Palette */
+            --oracle-black: #1a1a1a;
+            --oracle-teal: #0d6570;
+            --oracle-teal-dark: #094851;
+            --oracle-teal-mid: #0b5762;
+            --oracle-teal-light: #0f7885;
+            --oracle-glass: rgba(26, 130, 145, 0.35);
+            --oracle-glass-border: rgba(255, 255, 255, 0.15);
+            --oracle-white: #ffffff;
+            --oracle-text-dark: #0f4c56;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(180deg, #0b5762 0%, #0d6570 30%, #0f7885 70%, #0b5762 100%);
+            min-height: 100vh;
+            color: var(--oracle-white);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Binary Code Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255, 255, 255, 0.03) 2px,
+                    rgba(255, 255, 255, 0.03) 4px
+                );
+            opacity: 0.4;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Animated Binary Numbers */
+        body::after {
+            content: '01001000 01100101 01101100 01101100 01101111 00100000 01010111 01101111 01110010 01101100 01100100 00100000 01000100 01100001 01110100 01100001 00100000 01010011 01111001 01110011 01110100 01100101 01101101 01110011';
+            position: fixed;
+            top: 50%;
+            left: -10%;
+            width: 120%;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.08);
+            letter-spacing: 4px;
+            transform: translateY(-50%);
+            z-index: 0;
+            pointer-events: none;
+            word-wrap: break-word;
+            line-height: 2;
+        }
+
+        /* Navbar - Black Oracle Style */
+        .navbar {
+            background: var(--oracle-black);
+            padding: 0.75rem 2rem;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--oracle-white);
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .navbar-link {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .navbar-link:hover {
+            color: var(--oracle-white);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Hero Section - Oracle Style Greeting */
+        .hero {
+            padding: 2.5rem 2rem 1.5rem;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 0;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero p {
+            display: none;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--oracle-white);
+            margin-bottom: 1.5rem;
+            text-align: left;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        /* Tab Navigation - Oracle Style */
+        .tab-nav {
+            display: flex;
+            gap: 0;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tab-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .tab-link:hover {
+            color: var(--oracle-white);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .tab-link.active {
+            color: var(--oracle-white);
+            border-bottom-color: var(--oracle-white);
+        }
+
+        /* Springboard Grid - Oracle Style */
+        .springboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 3rem;
+            max-width: 1200px;
+        }
+
+        /* Glassmorphic Tile Card - Oracle Style */
+        .tile {
+            background: var(--oracle-glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--oracle-glass-border);
+            border-radius: 4px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            position: relative;
+            text-decoration: none;
+            color: var(--oracle-white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 110px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .tile:hover {
+            background: rgba(26, 130, 145, 0.45);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .tile-icon {
+            display: none;
+        }
+
+        .tile h3 {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: var(--oracle-white);
+            margin: 0;
+            line-height: 1.4;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .tile p {
+            display: none;
+        }
+
+        .tile.featured {
+            background: rgba(26, 130, 145, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tile.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .tile.disabled:hover {
+            transform: none;
+            background: var(--oracle-glass);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer p {
+            margin-bottom: 0.3rem;
+            font-size: 0.85rem;
+        }
+
+        .footer a {
+            color: var(--oracle-white);
+            text-decoration: none;
+            font-weight: 400;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .navbar-content {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .navbar-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .springboard-grid {
+                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+                gap: 0.8rem;
+            }
+
+            .container {
+                padding: 1.5rem 1rem;
+            }
+
+            .tab-nav {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .tile {
+                min-height: 90px;
+                padding: 1rem 0.5rem;
+            }
+
+            .tile h3 {
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Loading Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tile {
+            animation: fadeIn 0.4s ease-out forwards;
+            opacity: 0;
+        }
+
+        .tile:nth-child(1) { animation-delay: 0.05s; }
+        .tile:nth-child(2) { animation-delay: 0.1s; }
+        .tile:nth-child(3) { animation-delay: 0.15s; }
+        .tile:nth-child(4) { animation-delay: 0.2s; }
+        .tile:nth-child(5) { animation-delay: 0.25s; }
+        .tile:nth-child(6) { animation-delay: 0.3s; }
+        .tile:nth-child(7) { animation-delay: 0.35s; }
+        .tile:nth-child(8) { animation-delay: 0.4s; }
+        .tile:nth-child(9) { animation-delay: 0.45s; }
+        .tile:nth-child(10) { animation-delay: 0.5s; }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar - Black Oracle Style -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="/" class="navbar-brand">
+                <span>ORACLE</span>
+            </a>
+            <div class="navbar-links">
+                <a href="/" class="navbar-link">
+                    <i data-lucide="home" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 4px;"></i>
+                    Home
+                </a>
+                <a href="/app" class="navbar-link">
+                    <i data-lucide="bookmark" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 4px;"></i>
+                    Favorites
+                </a>
+                <a href="/app/user" class="navbar-link">
+                    <i data-lucide="play" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 4px;"></i>
+                    Recent
+                </a>
+                <a href="/app/tool" class="navbar-link">
+                    <i data-lucide="wrench" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 4px;"></i>
+                    Tools
+                </a>
+                <a href="/app/user" class="navbar-link">
+                    <i data-lucide="search" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 4px;"></i>
+                </a>
+                <a href="/api/method/logout" class="navbar-link">
+                    <i data-lucide="user" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 4px;"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section - Greeting -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Good afternoon, Julian Collins!</h1>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Tab Navigation -->
+        <div class="tab-nav">
+            <a href="#" class="tab-link active">Me</a>
+            <a href="#" class="tab-link">My Team</a>
+            <a href="#" class="tab-link">My Client Groups</a>
+            <a href="#" class="tab-link">Risk Management</a>
+            <a href="#" class="tab-link">Sales</a>
+            <a href="#" class="tab-link">Student Center</a>
+            <a href="#" class="tab-link">Procurement</a>
+            <a href="#" class="tab-link">Tools</a>
+            <a href="#" class="tab-link">Others</a>
+        </div>
+
+        <h2 class="section-title">Quick Actions</h2>
+
+        <!-- Springboard Tiles Grid -->
+        <div class="springboard-grid">
+            <!-- Row 1 -->
+            <a href="/app/user" class="tile">
+                <div class="tile-icon">
+                    <i data-lucide="user-circle" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>Edit My Details</h3>
+            </a>
+
+            <a href="/app/info" class="tile">
+                <div class="tile-icon">
+                    <i data-lucide="info" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>Public Info</h3>
+            </a>
+
+            <a href="/app/onboarding" class="tile">
+                <div class="tile-icon">
+                    <i data-lucide="users" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>Onboarding</h3>
+            </a>
+
+            <a href="/app/directory" class="tile">
+                <div class="tile-icon">
+                    <i data-lucide="building" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>Directory</h3>
+            </a>
+
+            <a href="/app/checklist" class="tile">
+                <div class="tile-icon">
+                    <i data-lucide="list-checks" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>Checklist Tasks</h3>
+            </a>
+
+            <a href="/app/time" class="tile">
+                <div class="tile-icon">
+                    <i data-lucide="clock" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>Time and Absences</h3>
+            </a>
+
+            <!-- Row 2 -->
+            <a href="/app/payroll" class="tile">
+                <div class="tile-icon">
+                    <i data-lucide="dollar-sign" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>Pay</h3>
+            </a>
+
+            <a href="/app/performance" class="tile">
+                <div class="tile-icon">
+                    <i data-lucide="trending-up" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>Performance</h3>
+            </a>
+
+            <a href="/app/learning" class="tile">
+                <div class="tile-icon">
+                    <i data-lucide="play-circle" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>Learning</h3>
+            </a>
+
+            <a href="/app/wellness" class="tile">
+                <div class="tile-icon">
+                    <i data-lucide="play-circle" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>What to Learn</h3>
+            </a>
+
+            <a href="/app/volunteering" class="tile">
+                <div class="tile-icon">
+                    <i data-lucide="hand-heart" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>Volunteering</h3>
+            </a>
+
+            <a href="/app/benefits" class="tile">
+                <div class="tile-icon">
+                    <i data-lucide="gift" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>Benefits</h3>
+            </a>
+
+            <!-- Row 3 -->
+            <a href="/app/career" class="tile">
+                <div class="tile-icon">
+                    <i data-lucide="briefcase" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>Current Jobs</h3>
+            </a>
+
+            <a href="/app/personal" class="tile">
+                <div class="tile-icon">
+                    <i data-lucide="user" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>Personal Information</h3>
+            </a>
+
+            <a href="/app/brand" class="tile">
+                <div class="tile-icon">
+                    <i data-lucide="target" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>Personal Brand</h3>
+            </a>
+
+            <a href="/app/expenses" class="tile">
+                <div class="tile-icon">
+                    <i data-lucide="credit-card" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>Expenses</h3>
+            </a>
+
+            <a href="/app/designations" class="tile">
+                <div class="tile-icon">
+                    <i data-lucide="file-text" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>Skills and Designations</h3>
+            </a>
+
+            <a href="/app/eoy" class="tile">
+                <div class="tile-icon">
+                    <i data-lucide="calendar" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>View End-of-Year Form</h3>
+            </a>
+
+            <a href="/app/more" class="tile">
+                <div class="tile-icon">
+                    <i data-lucide="plus" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>Show More</h3>
+            </a>
+        </div>
+
+        <h2 class="section-title" style="margin-top: 3rem;">Apps</h2>
+
+        <!-- Apps Grid -->
+        <div class="springboard-grid">
+            <a href="/app/human-resources" class="tile featured">
+                <div class="tile-icon">
+                    <i data-lucide="users" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>HR Management</h3>
+            </a>
+
+            <a href="/app/accounting" class="tile">
+                <div class="tile-icon">
+                    <i data-lucide="wallet" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>Finance</h3>
+            </a>
+
+            <a href="/app/buying" class="tile">
+                <div class="tile-icon">
+                    <i data-lucide="package" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>Operations</h3>
+            </a>
+
+            <a href="/app/selling" class="tile">
+                <div class="tile-icon">
+                    <i data-lucide="trending-up" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>Sales & CRM</h3>
+            </a>
+
+            <a href="/app/query-report" class="tile">
+                <div class="tile-icon">
+                    <i data-lucide="bar-chart" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>Analytics</h3>
+            </a>
+
+            <a href="/app/setup" class="tile">
+                <div class="tile-icon">
+                    <i data-lucide="settings" style="width: 28px; height: 28px;"></i>
+                </div>
+                <h3>Administration</h3>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Enterprise Hub. All rights reserved.</p>
+        <p>Powered by <a href="https://frappe.io" target="_blank">Frappe Framework</a> & <a href="https://erpnext.com"
+                target="_blank">ERPNext</a></p>
+    </footer>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
